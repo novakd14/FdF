@@ -6,7 +6,7 @@ CLIB = ft
 MLX_LIB = -lmlx -lXext -lX11
 
 NAME = fdf
-SRCS = main.c
+SRCS = main.c utils.c
 HEAD = fdf.h
 OBJS = $(SRCS:.c=.o)
 
@@ -16,7 +16,7 @@ all: $(NAME)
 
 $(NAME): $(OBJS) $(HEAD)
 	make -C $(CLIB_DIR)
-	$(CC) -o $@ $^ -L$(CLIB_DIR) -l$(CLIB) $(MLX_LIB)
+	$(CC) $(TEST_CFLAGS) -o $@ $^ -L$(CLIB_DIR) -l$(CLIB) $(MLX_LIB)
 
 clean:
 	rm -f *.o
@@ -27,10 +27,10 @@ fclean: clean
 re: fclean all
 
 run: $(NAME)
-	-./$<
+	-./$< $(ARG1) $(ARG2) $(ARG3)
 
 norm:
 	norminette
 
-# memleak: $(NAME)
-# 	valgrind -s --leak-check=full --show-leak-kinds=all ./$(TEST_NAME)
+memleak: $(NAME)
+	valgrind -s --leak-check=full --show-leak-kinds=all ./$< $(ARG1) $(ARG2) $(ARG3)
