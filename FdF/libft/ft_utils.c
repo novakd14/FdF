@@ -6,7 +6,7 @@
 /*   By: dnovak <dnovak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 12:34:55 by dnovak            #+#    #+#             */
-/*   Updated: 2024/10/21 12:35:43 by dnovak           ###   ########.fr       */
+/*   Updated: 2024/10/29 01:37:30 by dnovak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,5 +37,12 @@ long	ft_max(long a, long b)
 {
 	if (a < b)
 		return (b);
+	return (a);
+}
+
+long	ft_abs(long a)
+{
+	if (a < 0)
+		return (-a);
 	return (a);
 }

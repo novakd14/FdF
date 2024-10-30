@@ -6,7 +6,7 @@
 /*   By: dnovak <dnovak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 14:14:54 by dnovak            #+#    #+#             */
-/*   Updated: 2024/10/21 15:20:17 by dnovak           ###   ########.fr       */
+/*   Updated: 2024/10/29 01:39:55 by dnovak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,13 @@ typedef struct s_list
 }					t_list;
 
 int					ft_isalpha(int c);
+int					ft_isupper(int c);
+int					ft_islower(int c);
 int					ft_isdigit(int c);
 int					ft_isalnum(int c);
 int					ft_isascii(int c);
 int					ft_isprint(int c);
+int					ft_isspace(int c);
 size_t				ft_strlen(const char *s);
 size_t				ft_strlcpy(char *dst, const char *src, size_t size);
 size_t				ft_strlcat(char *dst, const char *src, size_t size);
@@ -56,6 +59,7 @@ void				ft_putchar_fd(char c, int fd);
 void				ft_putstr_fd(char *s, int fd);
 void				ft_putendl_fd(char *s, int fd);
 void				ft_putnbr_fd(int n, int fd);
+long				ft_strtol(const char *nptr, char **endptr, int base);
 
 // List functions
 t_list				*ft_lstnew(void *content);
@@ -78,5 +82,6 @@ unsigned long		ft_umin(unsigned long a, unsigned long b);
 unsigned long		ft_umax(unsigned long a, unsigned long b);
 long				ft_min(long a, long b);
 long				ft_max(long a, long b);
+long				ft_abs(long a);
 
 #endif // LIBFT_H
