@@ -6,7 +6,7 @@
 /*   By: dnovak <dnovak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 15:55:03 by dnovak            #+#    #+#             */
-/*   Updated: 2024/10/30 19:40:27 by dnovak           ###   ########.fr       */
+/*   Updated: 2024/10/31 12:09:38 by dnovak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,12 @@ static void	init_map(t_map *map)
 	map->points = NULL;
 	map->prop.ordinate = 0;
 	map->prop.abscissa = 0;
+	map->prop.rotate = 0;
+	map->prop.offset_unit = 5;
+	map->prop.scale_unit = 0.5;
+	map->prop.scale = 0;
+	map->prop.x_offset = 0;
+	map->prop.y_offset = 0;
 }
 
 static void	init_display(t_display *disp)

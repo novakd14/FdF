@@ -6,7 +6,7 @@
 /*   By: dnovak <dnovak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 20:01:09 by dnovak            #+#    #+#             */
-/*   Updated: 2024/10/30 15:08:25 by dnovak           ###   ########.fr       */
+/*   Updated: 2024/10/31 11:17:55 by dnovak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ static void	ft_put_pixel_to_image(int x, int y, int color, t_display *disp)
 	int	check_endian;
 	int	byte;
 
+	if ((x < 0 || x > disp->x_size - 1) || (y < 0 || y > disp->y_size - 1))
+		return ;
 	offset = disp->img_prop.size_line * y + disp->img_prop.bpp * x / 8;
 	check_endian = 1;
 	if (disp->img_prop.endian != *((char *)&check_endian))

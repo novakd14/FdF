@@ -6,7 +6,7 @@
 /*   By: dnovak <dnovak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 20:12:04 by dnovak            #+#    #+#             */
-/*   Updated: 2024/10/31 00:37:21 by dnovak           ###   ########.fr       */
+/*   Updated: 2024/10/31 11:19:30 by dnovak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,8 @@ static void	init_pointers(t_display *disp, t_map *map)
 		exit_message(EXIT_FAILURE, "Failed to set up connection.\n");
 	}
 	mlx_get_screen_size(disp->mlx_ptr, &disp->x_size, &disp->y_size);
-	disp->x_size = disp->x_size * 80 / 100;
-	disp->y_size = disp->y_size * 80 / 100;
-	disp->win_ptr = mlx_new_window(disp->mlx_ptr, disp->x_size, disp->y_size,
-			"Fdf");
+	disp->win_ptr = mlx_new_window(disp->mlx_ptr, disp->x_size * 80 / 100,
+			disp->y_size * 80 / 100, "Fdf");
 	if (disp->win_ptr == NULL)
 	{
 		free_map(map);
@@ -56,4 +54,9 @@ void	setup_display(t_display *disp, t_map *map)
 {
 	init_pointers(disp, map);
 	init_data(disp, map);
+}
+
+void	clear_image(t_display *disp)
+{
+	ft_bzero(disp->data, disp->img_prop.size_line * disp->y_size);
 }
