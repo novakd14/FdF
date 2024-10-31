@@ -6,7 +6,7 @@
 /*   By: dnovak <dnovak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 15:57:02 by dnovak            #+#    #+#             */
-/*   Updated: 2024/10/30 04:40:33 by dnovak           ###   ########.fr       */
+/*   Updated: 2024/10/30 23:24:36 by dnovak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 # endif
 
 # ifndef ESCAPE_KEY
-#  define ESCAPE_KEY 65307
+#  define ESCAPE_KEY 0XFF1B
 # endif
 # ifndef RED
 #  define RED 0x010000
@@ -116,6 +116,7 @@ void			setup_events(t_fdf *fdf);
 // Cleaning functions
 void			free_map(t_map *map);
 void			free_split_array(char **array);
+void			free_file_descriptor(int fd);
 void			free_all(t_map *map, char **split, int fd);
 void			end_session(t_display *disp);
 

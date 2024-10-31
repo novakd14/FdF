@@ -6,7 +6,7 @@
 /*   By: dnovak <dnovak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 11:38:41 by dnovak            #+#    #+#             */
-/*   Updated: 2024/10/29 20:11:32 by dnovak           ###   ########.fr       */
+/*   Updated: 2024/10/30 23:43:48 by dnovak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ static int	open_file(char *file_name)
 static char	*load_first_line(int fd)
 {
 	char	*line;
+	char	*trim;
 
 	line = get_next_line(fd);
 	if (line == NULL)
@@ -38,7 +39,14 @@ static char	*load_first_line(int fd)
 		close(fd);
 		exit_message(EXIT_FAILURE, "File is empty.\n");
 	}
-	return (line);
+	trim = ft_strtrim(line, "\t\n\v\f\r ");
+	free(line);
+	if (trim == NULL)
+	{
+		free_file_descriptor(fd);
+		exit_message(EXIT_FAILURE, "Could not allocate memory.\n");
+	}
+	return (trim);
 }
 
 static void	check_split(char **split, t_map *map, int fd)
@@ -67,6 +75,24 @@ static void	check_split(char **split, t_map *map, int fd)
 	}
 }
 
+static char	*load_next_line(int fd, t_map *map)
+{
+	char	*line;
+	char	*trim;
+
+	line = get_next_line(fd);
+	if (line == NULL)
+		return (NULL);
+	trim = ft_strtrim(line, "\t\n\v\f\r ");
+	free(line);
+	if (trim == NULL)
+	{
+		free_all(map, NULL, fd);
+		exit_message(EXIT_FAILURE, "Could not allocate memory.\n");
+	}
+	return (trim);
+}
+
 void	load_map(char *file_name, t_map *map)
 {
 	int		fd;
@@ -87,7 +113,7 @@ void	load_map(char *file_name, t_map *map)
 		check_split(split, map, fd);
 		expand_map(map, split, fd);
 		map->prop.ordinate++;
-		line = get_next_line(fd);
+		line = load_next_line(fd, map);
 	}
 	close(fd);
 }

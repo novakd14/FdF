@@ -6,7 +6,7 @@
 /*   By: dnovak <dnovak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 20:01:09 by dnovak            #+#    #+#             */
-/*   Updated: 2024/10/30 05:13:44 by dnovak           ###   ########.fr       */
+/*   Updated: 2024/10/30 15:08:25 by dnovak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,11 @@ static void	ft_put_x_line(t_point *pnt_min, t_point *pnt_max, t_display *disp)
 	{
 		y_curr = (pnt_max->y - pnt_min->y) / (pnt_max->x - pnt_min->x) * (x_curr
 				- pnt_min->x) + pnt_min->y;
-		color = (pnt_min->color * (pnt_max->x - x_curr) + pnt_max->color
-				* (x_curr - pnt_min->x)) / (pnt_max->x - pnt_min->x);
+		if (pnt_min->color == pnt_max->color)
+			color = pnt_min->color;
+		else
+			color = (pnt_min->color * (pnt_max->x - x_curr) + pnt_max->color
+					* (x_curr - pnt_min->x)) / (pnt_max->x - pnt_min->x);
 		ft_put_pixel_to_image((int)x_curr, (int)y_curr, (int)color, disp);
 		x_curr++;
 	}

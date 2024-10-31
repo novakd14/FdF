@@ -6,7 +6,7 @@
 /*   By: dnovak <dnovak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 11:48:21 by dnovak            #+#    #+#             */
-/*   Updated: 2024/10/24 15:21:02 by dnovak           ###   ########.fr       */
+/*   Updated: 2024/10/31 00:33:45 by dnovak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,19 @@ void	free_split_array(char **array)
 	free(array);
 }
 
+void	free_file_descriptor(int fd)
+{
+	char	*line;
+
+	line = get_next_line(fd);
+	while (line != NULL)
+	{
+		free(line);
+		line = get_next_line(fd);
+	}
+	close(fd);
+}
+
 void	free_all(t_map *map, char **split, int fd)
 {
 	if (map->points != NULL)
@@ -39,7 +52,7 @@ void	free_all(t_map *map, char **split, int fd)
 	if (split != NULL)
 		free_split_array(split);
 	if (fd >= 0)
-		close(fd);
+		free_file_descriptor(fd);
 }
 
 void	end_session(t_display *disp)
