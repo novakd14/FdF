@@ -8,8 +8,9 @@ MLX_LIB = -lmlx -lXext -lX11
 NAME = fdf
 SRCS = main.c load_map.c expand_map.c setup_projection.c scale_projection.c \
 		setup_display.c map_to_image.c setup_events.c free_all.c utils.c
+SRCS_BONUS = key_actions.c
 HEAD = fdf.h
-OBJS = $(SRCS:.c=.o)
+OBJS = $(SRCS:.c=.o) $(SRCS_BONUS:.c=.o)
 
 .PHONY: all clean fclean re test norm memleak
 
@@ -34,4 +35,4 @@ norm:
 	norminette
 
 memleak: $(NAME)
-	valgrind -s --leak-check=full --show-leak-kinds=all ./$< $(ARG1) $(ARG2) $(ARG3)
+	valgrind -s --leak-check=full --show-leak-kinds=all --track-origins=yes ./$< $(ARG1) $(ARG2) $(ARG3)
