@@ -6,7 +6,7 @@
 /*   By: dnovak <dnovak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 20:30:44 by dnovak            #+#    #+#             */
-/*   Updated: 2024/10/30 12:12:58 by dnovak           ###   ########.fr       */
+/*   Updated: 2024/10/30 20:34:33 by dnovak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ int	on_expose(void *param)
 	disp = ((t_fdf *)param)->disp;
 	set_scale(map, disp);
 	scale_projection(map, disp);
-	mlx_put_image_to_window(disp->mlx_ptr, disp->win_ptr, disp->img_ptr, 0, 0);
-	ft_printf("Exposed\n");
+	mlx_put_image_to_window(disp->mlx_ptr, disp->win_ptr, disp->img_ptr,
+		disp->img_prop.x_offset, disp->img_prop.y_offset);
 	return (1);
 }
 
