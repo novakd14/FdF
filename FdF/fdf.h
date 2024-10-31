@@ -6,7 +6,7 @@
 /*   By: dnovak <dnovak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 15:57:02 by dnovak            #+#    #+#             */
-/*   Updated: 2024/10/31 12:05:48 by dnovak           ###   ########.fr       */
+/*   Updated: 2024/10/31 14:59:18 by dnovak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,13 @@
 # include <mlx.h>    // MiniLibX
 # include <stdlib.h> // exit
 
+typedef enum e_projection
+{
+	ISOMETRIC,
+	CABINET,
+	PROJ_NUM
+}				t_proj;
+
 typedef struct s_point
 {
 	int			alt;
@@ -58,9 +65,11 @@ typedef struct s_map_prop
 	int			ordinate;
 	int			rotate;
 	int			offset_unit;
+	t_proj		projection;
 	double_t	scale_unit;
 	double_t	x_offset;
 	double_t	y_offset;
+	double_t	orig_scale;
 	double_t	scale;
 	double_t	x_min;
 	double_t	x_max;
@@ -110,6 +119,8 @@ void			expand_map(t_map *map, char **split, int fd);
 void			setup_projection(t_map *map);
 void			set_scale(t_map *map, t_display *disp);
 void			scale_projection(t_map *map, t_display *disp);
+void			isometric_projection(int o, int a, t_point *point, int rotate);
+void			cabinet_projection(int o, int a, t_point *point, int rotate);
 
 // Put map to image
 void			ft_put_map_to_image(t_map *map, t_display *disp);
@@ -119,11 +130,14 @@ void			setup_display(t_display *disp, t_map *map);
 void			setup_events(t_fdf *fdf);
 void			clear_image(t_display *disp);
 
-// Key actions
+// Event actions
 void			rotate_image(int keycode, t_map *map, t_display *disp);
 void			translate_image(int keycode, t_map *map, t_display *disp);
 void			scale_image(int keycode, t_map *map, t_display *disp);
 void			mouse_scale_image(int button, t_map *map, t_display *disp);
+void			change_projection(t_map *map, t_display *disp);
+void			reset_image(t_map *map, t_display *disp);
+
 // Cleaning functions
 void			free_map(t_map *map);
 void			free_split_array(char **array);

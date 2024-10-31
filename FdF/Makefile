@@ -8,7 +8,7 @@ MLX_LIB = -lmlx -lXext -lX11
 NAME = fdf
 SRCS = main.c load_map.c expand_map.c setup_projection.c scale_projection.c \
 		setup_display.c map_to_image.c setup_events.c free_all.c utils.c
-SRCS_BONUS = key_actions.c
+SRCS_BONUS = key_actions.c mouse_actions.c projections.c
 HEAD = fdf.h
 OBJS = $(SRCS:.c=.o) $(SRCS_BONUS:.c=.o)
 

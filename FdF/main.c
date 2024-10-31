@@ -6,7 +6,7 @@
 /*   By: dnovak <dnovak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 15:55:03 by dnovak            #+#    #+#             */
-/*   Updated: 2024/10/31 12:09:38 by dnovak           ###   ########.fr       */
+/*   Updated: 2024/10/31 15:00:05 by dnovak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ static void	init_map(t_map *map)
 	map->prop.scale = 0;
 	map->prop.x_offset = 0;
 	map->prop.y_offset = 0;
+	map->prop.projection = ISOMETRIC;
 }
 
 static void	init_display(t_display *disp)
@@ -57,6 +58,7 @@ int	main(int argc, char **argv)
 	init_display(&disp);
 	setup_display(&disp, &map);
 	set_scale(&map, &disp);
+	map.prop.orig_scale = map.prop.scale;
 	scale_projection(&map, &disp);
 	ft_put_map_to_image(&map, &disp);
 	mlx_put_image_to_window(disp.mlx_ptr, disp.win_ptr, disp.img_ptr,
