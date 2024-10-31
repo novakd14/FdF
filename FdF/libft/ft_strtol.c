@@ -6,7 +6,7 @@
 /*   By: dnovak <dnovak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/25 16:33:13 by dnovak            #+#    #+#             */
-/*   Updated: 2024/10/30 15:19:28 by dnovak           ###   ########.fr       */
+/*   Updated: 2024/10/31 16:14:10 by dnovak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,8 @@ static long	new_num(long num, int sign, int c, int base)
 		add = c - 'A' + 10;
 	else if (ft_islower(c))
 		add = c - 'a' + 10;
+	else
+		add = 0;
 	if (num >= __LONG_MAX__ - add && sign == 1)
 		return (__LONG_MAX__);
 	if (num > __LONG_MAX__ - add && sign == -1)
