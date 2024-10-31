@@ -6,7 +6,7 @@
 /*   By: dnovak <dnovak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 20:30:44 by dnovak            #+#    #+#             */
-/*   Updated: 2024/10/31 11:56:36 by dnovak           ###   ########.fr       */
+/*   Updated: 2024/10/31 14:54:52 by dnovak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,10 @@ int	on_key(int keycode, void *param)
 		translate_image(keycode, map, disp);
 	else if (keycode == 'w' || keycode == 's')
 		scale_image(keycode, map, disp);
+	else if (keycode == 'p')
+		change_projection(map, disp);
+	else if (keycode == 'r')
+		reset_image(map, disp);
 	return (1);
 }
 

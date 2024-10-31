@@ -6,7 +6,7 @@
 /*   By: dnovak <dnovak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 10:50:46 by dnovak            #+#    #+#             */
-/*   Updated: 2024/10/31 11:53:45 by dnovak           ###   ########.fr       */
+/*   Updated: 2024/10/31 15:00:32 by dnovak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,14 +67,25 @@ void	scale_image(int keycode, t_map *map, t_display *disp)
 		disp->img_prop.x_offset, disp->img_prop.y_offset);
 }
 
-void	mouse_scale_image(int button, t_map *map, t_display *disp)
+void	change_projection(t_map *map, t_display *disp)
 {
-	if (button == 0x4)
-		map->prop.scale += map->prop.scale_unit;
-	else if (button == 0x5)
-		map->prop.scale -= map->prop.scale_unit;
-	else
-		return ;
+	map->prop.projection = (map->prop.projection + 1) % PROJ_NUM;
+	setup_projection(map);
+	scale_projection(map, disp);
+	clear_image(disp);
+	ft_put_map_to_image(map, disp);
+	mlx_clear_window(disp->mlx_ptr, disp->win_ptr);
+	mlx_put_image_to_window(disp->mlx_ptr, disp->win_ptr, disp->img_ptr,
+		disp->img_prop.x_offset, disp->img_prop.y_offset);
+}
+
+void	reset_image(t_map *map, t_display *disp)
+{
+	map->prop.rotate = 0;
+	map->prop.x_offset = 0;
+	map->prop.y_offset = 0;
+	map->prop.scale = map->prop.orig_scale;
+	map->prop.projection = ISOMETRIC;
 	setup_projection(map);
 	scale_projection(map, disp);
 	clear_image(disp);
